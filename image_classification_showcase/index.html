@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Image Classification with Deep Learning — project overview, ResNet50 model, dataset, demo, report, presentation, and source code.">
+  <title>VisionLab — Image Classification Project</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="nav">
+    <a class="brand" href="#home"><span class="brand-mark">V</span> Vision<span>Lab</span></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#overview">Overview</a><a href="#model">Model</a><a href="#demo">Demo</a><a href="#resources">Resources</a>
+      <a class="nav-cta" href="#repository">View project ↗</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-glow glow-one"></div><div class="hero-glow glow-two"></div>
+      <div class="hero-content">
+        <div class="eyebrow"><span class="pulse"></span> DEEP LEARNING · COMPUTER VISION</div>
+        <h1>Teaching computers<br>to <span class="gradient-text">see the world.</span></h1>
+        <p class="hero-copy">An image classification project exploring how deep learning can identify objects in images using a convolutional neural network.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#overview">Explore the project <span>↓</span></a>
+          <a class="button button-ghost" href="#resources">Project resources ↗</a>
+        </div>
+        <div class="hero-stats">
+          <div><strong>ResNet50</strong><span>Model architecture</span></div>
+          <div><strong>224 × 224</strong><span>Input image size</span></div>
+          <div><strong>1000</strong><span>ImageNet classes*</span></div>
+        </div>
+        <p class="tiny-note">*For the default pretrained ImageNet ResNet50 model. Update these details if you train a custom model.</p>
+      </div>
+      <div class="hero-visual">
+        <div class="visual-top"><span class="window-dots"><i></i><i></i><i></i></span><span>vision_model.py</span><span class="live-label">MODEL OVERVIEW</span></div>
+        <div class="image-stack">
+          <img class="main-photo" src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=1000&q=85" alt="Dog outdoors, example image for image classification">
+          <div class="scan-line"></div>
+          <div class="corner corner-tl"></div><div class="corner corner-tr"></div><div class="corner corner-bl"></div><div class="corner corner-br"></div>
+          <div class="prediction-chip"><span class="check-icon">✓</span><div><b>Example image</b><small>Ready for classification</small></div><span class="chip-arrow">↗</span></div>
+        </div>
+        <div class="visual-bottom"><span><i class="green-dot"></i> Image input</span><span>Preprocess → Predict → Decode</span></div>
+      </div>
+      <div class="hero-orbit orbit-a"></div><div class="hero-orbit orbit-b"></div>
+    </section>
+
+    <section class="section intro-section" id="overview">
+      <div class="section-kicker">01 / PROJECT OVERVIEW</div>
+      <div class="section-heading-row">
+        <h2>From pixels to<br><span class="muted-heading">meaningful labels.</span></h2>
+        <p class="section-lead">Image classification is a computer vision task where a model analyzes an image and predicts which category best describes its contents.</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="feature-icon purple">◎</div><h3>The problem</h3>
+          <p>Manually sorting large collections of images can take time. Automated classification can help identify likely image categories quickly.</p>
+          <span class="card-index">01</span>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon blue">⌘</div><h3>The approach</h3>
+          <p>A Flask web interface accepts an image, resizes it to 224 × 224 pixels, preprocesses it, and sends it to a ResNet50 model.</p>
+          <span class="card-index">02</span>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon green">↗</div><h3>The output</h3>
+          <p>The model returns predicted ImageNet labels and confidence scores. These scores are model estimates, not guarantees of correctness.</p>
+          <span class="card-index">03</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section model-section" id="model">
+      <div class="model-copy">
+        <div class="section-kicker">02 / MODEL & PIPELINE</div>
+        <h2>A proven architecture.<br><span class="muted-heading">A clear workflow.</span></h2>
+        <p class="body-copy">The current Python source uses ResNet50 with pretrained ImageNet weights. ResNet is a convolutional neural network architecture that uses residual connections to help train deep networks.</p>
+        <div class="pipeline">
+          <div class="pipeline-step"><span class="step-number">01</span><div><b>Upload image</b><small>User selects an image in the web interface.</small></div></div>
+          <div class="pipeline-step"><span class="step-number">02</span><div><b>Preprocess</b><small>Resize to 224 × 224 and apply ResNet50 preprocessing.</small></div></div>
+          <div class="pipeline-step"><span class="step-number">03</span><div><b>Predict</b><small>Run the image through the pretrained model.</small></div></div>
+          <div class="pipeline-step"><span class="step-number">04</span><div><b>Decode results</b><small>Display the top predicted class and its score.</small></div></div>
+        </div>
+      </div>
+      <div class="model-card">
+        <div class="model-card-header"><span>MODEL SPECIFICATION</span><span class="status-pill"><i></i> Source-code based</span></div>
+        <div class="model-graphic">
+          <div class="network-input"><span>IMAGE</span><div class="mini-image">▧</div><small>224 × 224 × 3</small></div>
+          <div class="network-arrow">→</div>
+          <div class="network-core"><div class="core-symbol">⌘</div><b>ResNet50</b><small>Residual CNN</small></div>
+          <div class="network-arrow">→</div>
+          <div class="network-output"><span>OUTPUT</span><div class="output-bars"><i></i><i></i><i></i><i></i></div><small>Class scores</small></div>
+        </div>
+        <div class="spec-list">
+          <div><span>Framework</span><b>TensorFlow / Keras</b></div>
+          <div><span>Weights</span><b>ImageNet pretrained</b></div>
+          <div><span>Task</span><b>Multi-class classification</b></div>
+          <div><span>Interface</span><b>Flask (Python)</b></div>
+        </div>
+        <div class="model-disclaimer">Current implementation uses pretrained weights; add your own dataset, training code, and evaluation metrics if required for your course submission.</div>
+      </div>
+    </section>
+
+    <section class="section gallery-section">
+      <div class="section-kicker">03 / VISUAL EXAMPLES</div>
+      <div class="section-heading-row">
+        <h2>Images are the input.<br><span class="muted-heading">Predictions are the output.</span></h2>
+        <p class="section-lead">These photos are illustrative examples for the project page, not recorded model test results.</p>
+      </div>
+      <div class="gallery-grid">
+        <figure class="gallery-card gallery-large"><img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=1000&q=85" alt="Dog outdoors"><figcaption><span>EXAMPLE IMAGE</span><b>Animals & pets</b></figcaption></figure>
+        <figure class="gallery-card"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=700&q=85" alt="Mountain landscape"><figcaption><span>EXAMPLE IMAGE</span><b>Nature & landscapes</b></figcaption></figure>
+        <figure class="gallery-card"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=85" alt="Red sneaker"><figcaption><span>EXAMPLE IMAGE</span><b>Everyday objects</b></figcaption></figure>
+      </div>
+    </section>
+
+    <section class="demo-section" id="demo">
+      <div class="demo-inner">
+        <div class="section-kicker">04 / INTERACTIVE PREVIEW</div>
+        <div class="section-heading-row">
+          <h2>Try the interface.</h2>
+          <p class="section-lead">This is a front-end preview. It displays your selected image locally but does not run TensorFlow or generate a real prediction on Vercel.</p>
+        </div>
+        <div class="demo-panel">
+          <div class="upload-area" id="uploadArea">
+            <input type="file" id="imageInput" accept="image/*" hidden>
+            <div class="upload-placeholder" id="uploadPlaceholder">
+              <div class="upload-icon">↑</div><h3>Choose an image</h3><p>Click below to preview an image from your device.</p>
+              <button class="button button-primary" id="chooseImage" type="button">Choose image</button>
+              <small>JPG, PNG, WEBP · Preview only</small>
+            </div>
+            <img id="previewImage" alt="Selected image preview" hidden>
+          </div>
+          <div class="demo-result">
+            <span class="result-label">DEMO STATUS</span>
+            <div class="result-symbol">✳</div>
+            <h3 id="demoTitle">Ready for your image</h3>
+            <p id="demoText">Select a file to preview it here. Real predictions require a working model inference backend.</p>
+            <div class="result-meter"><span></span></div>
+            <div class="result-foot"><span>Inference</span><b>Not connected</b></div>
+            <button class="text-button" id="resetDemo" type="button">Reset preview ↺</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section resources-section" id="resources">
+      <div class="section-kicker">05 / PROJECT RESOURCES</div>
+      <div class="section-heading-row">
+        <h2>Everything in one place.</h2>
+        <p class="section-lead">Add your final repository, report, presentation, and video URLs below so your instructor can review the complete submission.</p>
+      </div>
+      <div class="resource-grid">
+        <a class="resource-card" id="repository" href="https://github.com/Maham0982/deep_learning_project" target="_blank" rel="noopener"><span class="resource-icon">⌘</span><span class="resource-type">SOURCE CODE</span><b>GitHub repository</b><p>Source code, dependencies, dataset information, and model files.</p><span class="resource-link">Open repository ↗</span></a>
+        <a class="resource-card" href="#" data-placeholder="report"><span class="resource-icon">▤</span><span class="resource-type">DOCUMENTATION</span><b>Project report</b><p>Problem statement, methodology, architecture, training, and results.</p><span class="resource-link">Add report link ↗</span></a>
+        <a class="resource-card" href="#" data-placeholder="presentation"><span class="resource-icon">▣</span><span class="resource-type">PRESENTATION</span><b>Slides & voiceover</b><p>Presentation slides and a narrated walkthrough of the project.</p><span class="resource-link">Add presentation link ↗</span></a>
+        <a class="resource-card" href="#" data-placeholder="video"><span class="resource-icon">▶</span><span class="resource-type">VIDEO</span><b>YouTube walkthrough</b><p>Watch the project explanation and demonstration.</p><span class="resource-link">Add YouTube link ↗</span></a>
+        <a class="resource-card" href="#" data-placeholder="linkedin"><span class="resource-icon">in</span><span class="resource-type">PROJECT UPDATE</span><b>LinkedIn post</b><p>Share your work, learning, and completed project resources.</p><span class="resource-link">Add LinkedIn link ↗</span></a>
+        <a class="resource-card" href="#model"><span class="resource-icon">◉</span><span class="resource-type">MODEL DETAILS</span><b>Architecture & workflow</b><p>Review the model choice, input preparation, and prediction steps.</p><span class="resource-link">Explore model ↗</span></a>
+      </div>
+      <div class="resource-alert"><span>!</span><p><b>Before submission:</b> Replace the placeholder links with working URLs. Do not report training accuracy or dataset details until you have actually trained and evaluated your model.</p></div>
+    </section>
+
+    <section class="final-cta">
+      <div class="cta-orb"></div>
+      <div class="section-kicker">THE PROJECT JOURNEY</div>
+      <h2>Build it. Test it.<br><span class="gradient-text">Explain what you learned.</span></h2>
+      <p>This website is a static project showcase. The TensorFlow inference service and trained-model evaluation must be deployed separately for live predictions.</p>
+      <a class="button button-primary" href="#resources">Explore project links ↗</a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a class="brand" href="#home"><span class="brand-mark">V</span> Vision<span>Lab</span></a>
+    <p>Deep Learning · Image Classification</p>
+    <a href="#home">Back to top ↑</a>
+    <small>Project showcase template · Update links and results before submission.</small>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
